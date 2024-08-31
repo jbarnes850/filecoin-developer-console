@@ -15,7 +15,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { useTheme } from "next-themes";
 import { useToast } from "@/components/ui/use-toast"
 
-export function AppPage() {
+export default function AppPage() {
   const [activeKit, setActiveKit] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [onboardingProgress, setOnboardingProgress] = useState(0);
@@ -256,7 +256,7 @@ export function AppPage() {
             className="flex items-center"
           >
             <Image
-              src="@Filecoin.png"
+              src="/Filecoin.png"
               alt="Filecoin Logo"
               width={50}
               height={50}
