@@ -79,7 +79,7 @@ export default function AppPage() {
       path: 'src/state-storage-starter-kit',
     },
   ];
-
+  
   useEffect(() => {
     if (activeKit) {
       const timer = setInterval(() => {
@@ -495,6 +495,29 @@ export default function AppPage() {
             </TabsContent>
           </Tabs>
         </main>
+
+        <footer className="mt-12 py-8 border-t border-gray-200 dark:border-gray-700">
+          <div className="flex flex-col sm:flex-row items-center justify-between">
+            <div className="mb-4 sm:mb-0">
+              <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">What can we do to improve?</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Suggest a feature, give us feedback, or just say hello!
+              </p>
+            </div>
+            <Button asChild className="bg-gray-200 hover:bg-gray-300 text-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-300">
+              <Link href="https://filecoin.io/slack" target="_blank" rel="noopener noreferrer" className="flex items-center">
+                <Image
+                  src="/Slack icon.png"
+                  alt="Slack"
+                  width={24}
+                  height={24}
+                  className="mr-2 filter grayscale"
+                />
+                Join us on Slack
+              </Link>
+            </Button>
+          </div>
+        </footer>
       </div>
     </div>
   );
