@@ -246,254 +246,256 @@ export default function AppPage() {
   };
 
   return (
-    <div className="container mx-auto p-4 min-h-screen flex flex-col bg-gradient-to-b from-purple-100 to-blue-100 dark:from-gray-900 dark:to-gray-800">
-      <header className="mb-12 pt-8">
-        <div className="flex items-center justify-between">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center"
-          >
-            <Image
-              src="/Filecoin.png"
-              alt="Filecoin Logo"
-              width={50}
-              height={50}
-              className="mr-4"
-            />
-            <h1 className="text-4xl font-bold text-[#0090FF]">Filecoin Developer Console</h1>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center space-x-4"
-          >
-            <Button
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              variant="outline"
-              size="icon"
-              className="w-10 h-10 rounded-full bg-white dark:bg-gray-800"
+    <div className="min-h-screen w-full bg-gradient-to-b from-purple-100 to-blue-100 dark:from-gray-900 dark:to-gray-800">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-screen flex flex-col">
+        <header className="mb-8 sm:mb-12">
+          <div className="flex flex-col sm:flex-row items-center justify-between">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center mb-4 sm:mb-0"
             >
-              {mounted && (
-                theme === 'dark' ? (
-                  <Sun className="h-5 w-5 text-gray-800 dark:text-white" />
-                ) : (
-                  <Moon className="h-5 w-5 text-gray-800 dark:text-white" />
-                )
-              )}
-              <span className="sr-only">Toggle theme</span>
-            </Button>
-            <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white dark:bg-[#007ACC] dark:hover:bg-[#0090FF]">
-              <Link href="https://docs.filecoin.io/" target="_blank" rel="noopener noreferrer">
-                Explore Filecoin Docs
-              </Link>
-            </Button>
-          </motion.div>
-        </div>
-      </header>
-
-      <main className="flex-grow">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Welcome to the Filecoin Developer Console</h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300">Jumpstart your Filecoin development with our comprehensive toolkit</p>
-        </div>
-
-        <Tabs defaultValue="dashboard" className="space-y-8">
-          <TabsList className="grid w-full grid-cols-4 bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
-            {['dashboard', 'tools', 'learn', 'test-tokens'].map((tab, index) => (
-              <TabsTrigger
-                key={tab}
-                value={tab}
-                className="text-gray-700 dark:text-gray-300 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-[#0090FF] rounded-md transition-all"
+              <Image
+                src="/Filecoin.png"
+                alt="Filecoin Logo"
+                width={50}
+                height={50}
+                className="mr-4"
+              />
+              <h1 className="text-3xl sm:text-4xl font-bold text-[#0090FF]">Filecoin Developer Console</h1>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center space-x-4"
+            >
+              <Button
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                variant="outline"
+                size="icon"
+                className="w-10 h-10 rounded-full bg-white dark:bg-gray-800"
               >
-                {tab === 'dashboard' && <Home className="mr-2 h-4 w-4" />}
-                {tab === 'tools' && <Wrench className="mr-2 h-4 w-4" />}
-                {tab === 'learn' && <Book className="mr-2 h-4 w-4" />}
-                {tab === 'test-tokens' && <Coins className="mr-2 h-4 w-4" />}
-                {tab.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+                {mounted && (
+                  theme === 'dark' ? (
+                    <Sun className="h-5 w-5 text-gray-800 dark:text-white" />
+                  ) : (
+                    <Moon className="h-5 w-5 text-gray-800 dark:text-white" />
+                  )
+                )}
+                <span className="sr-only">Toggle theme</span>
+              </Button>
+              <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white dark:bg-[#007ACC] dark:hover:bg-[#0090FF]">
+                <Link href="https://docs.filecoin.io/" target="_blank" rel="noopener noreferrer">
+                  Explore Filecoin Docs
+                </Link>
+              </Button>
+            </motion.div>
+          </div>
+        </header>
 
-          <TabsContent value="dashboard">
-            <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 mb-8">
-              <CardHeader>
-                <CardTitle className="text-[#0090FF]">Filecoin Starter Kits</CardTitle>
-                <CardDescription className="text-gray-600 dark:text-gray-400">Select a starter kit to begin your Filecoin development journey</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Input
-                  type="text"
-                  placeholder="Search kits by name or description..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white mb-4"
-                />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {filteredKits.map((kit) => (
-                    <Card key={kit.id} className="bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors cursor-pointer" onClick={() => handleKitChange(kit.id)}>
+        <main className="flex-grow">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">Welcome to the Filecoin Developer Console</h2>
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300">Tools and resources to help you build and scale your app on Filecoin</p>
+          </div>
+
+          <Tabs defaultValue="dashboard" className="space-y-8">
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
+              {['dashboard', 'tools', 'learn', 'test-tokens'].map((tab, index) => (
+                <TabsTrigger
+                  key={tab}
+                  value={tab}
+                  className="text-gray-700 dark:text-gray-300 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-[#0090FF] rounded-md transition-all"
+                >
+                  {tab === 'dashboard' && <Home className="mr-2 h-4 w-4" />}
+                  {tab === 'tools' && <Wrench className="mr-2 h-4 w-4" />}
+                  {tab === 'learn' && <Book className="mr-2 h-4 w-4" />}
+                  {tab === 'test-tokens' && <Coins className="mr-2 h-4 w-4" />}
+                  {tab.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+
+            <TabsContent value="dashboard">
+              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 mb-8">
+                <CardHeader>
+                  <CardTitle className="text-[#0090FF]">Filecoin Starter Kits</CardTitle>
+                  <CardDescription className="text-gray-600 dark:text-gray-400">Select a starter kit to begin your Filecoin development journey</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Input
+                    type="text"
+                    placeholder="Search kits by name or description..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white mb-4"
+                  />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {filteredKits.map((kit) => (
+                      <Card key={kit.id} className="bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors cursor-pointer" onClick={() => handleKitChange(kit.id)}>
+                        <CardHeader>
+                          <CardTitle className="text-[#0090FF] flex items-center justify-between">
+                            <span className="flex items-center">
+                              {kit.icon}
+                              <span className="ml-2">{kit.name}</span>
+                            </span>
+                            <Link href={kit.repo} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                              <Github className="h-5 w-5 text-gray-400 hover:text-[#0090FF] transition-colors" />
+                            </Link>
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm text-gray-600 dark:text-gray-300">{kit.description}</p>
+                          <div className="mt-2 flex justify-between text-xs text-gray-500 dark:text-gray-400">
+                            <span>{kit.difficulty}</span>
+                            <span>{kit.setupTime}</span>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+              {activeKit && (
+                <>
+                  <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 mb-8">
+                    <CardHeader>
+                      <CardTitle className="text-[#0090FF]">Setup Progress</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <Progress value={onboardingProgress} className="w-full" />
+                    </CardContent>
+                  </Card>
+                  {renderKitInterface(activeKit)}
+                </>
+              )}
+            </TabsContent>
+
+            <TabsContent value="tools">
+              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                <CardHeader>
+                  <CardTitle className="text-[#0090FF]">Developer Resources</CardTitle>
+                  <CardDescription className="text-gray-600 dark:text-gray-400">Essential tools and resources for Filecoin development</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white w-full">
+                      <Link href="https://docs.filecoin.io/" target="_blank" rel="noopener noreferrer">
+                        Filecoin Documentation
+                      </Link>
+                    </Button>
+                    <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white w-full">
+                      <Link href="https://github.com/filecoin-project" target="_blank" rel="noopener noreferrer">
+                        Filecoin GitHub Repositories
+                      </Link>
+                    </Button>
+                    <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white w-full">
+                      <Link href="https://data.lighthouse.storage/" target="_blank" rel="noopener noreferrer">
+                        FVM Data Depot
+                      </Link>
+                    </Button>
+                    <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white w-full">
+                      <Link href="https://faucet.calibration.fildev.network/" target="_blank" rel="noopener noreferrer">
+                        Filecoin Faucet (Calibration Testnet)
+                      </Link>
+                    </Button>
+                    <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white w-full">
+                      <Link href="https://filfox.info/en" target="_blank" rel="noopener noreferrer">
+                        Filfox Block Explorer
+                      </Link>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="learn">
+              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                <CardHeader>
+                  <CardTitle className="text-[#0090FF]">Learn Filecoin</CardTitle>
+                  <CardDescription className="text-gray-600 dark:text-gray-400">Educational resources and tutorials for Filecoin developers</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <Card className="bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600">
                       <CardHeader>
-                        <CardTitle className="text-[#0090FF] flex items-center justify-between">
-                          <span className="flex items-center">
-                            {kit.icon}
-                            <span className="ml-2">{kit.name}</span>
-                          </span>
-                          <Link href={kit.repo} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
-                            <Github className="h-5 w-5 text-gray-400 hover:text-[#0090FF] transition-colors" />
-                          </Link>
-                        </CardTitle>
+                        <CardTitle className="text-[#0090FF]">Filecoin Fundamentals</CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">{kit.description}</p>
-                        <div className="mt-2 flex justify-between text-xs text-gray-500 dark:text-gray-400">
-                          <span>{kit.difficulty}</span>
-                          <span>{kit.setupTime}</span>
-                        </div>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">Understand the core concepts of Filecoin&apos;s decentralized storage network and its underlying technology.</p>
                       </CardContent>
+                      <CardFooter>
+                        <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white">
+                          <Link href="https://docs.filecoin.io/basics/what-is-filecoin/" target="_blank" rel="noopener noreferrer">
+                            Explore Fundamentals
+                          </Link>
+                        </Button>
+                      </CardFooter>
                     </Card>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-            {activeKit && (
-              <>
-                <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 mb-8">
-                  <CardHeader>
-                    <CardTitle className="text-[#0090FF]">Setup Progress</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <Progress value={onboardingProgress} className="w-full" />
-                  </CardContent>
-                </Card>
-                {renderKitInterface(activeKit)}
-              </>
-            )}
-          </TabsContent>
+                    <Card className="bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600">
+                      <CardHeader>
+                        <CardTitle className="text-[#0090FF]">Smart Contract Development</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">Learn to develop and deploy smart contracts on the Filecoin Virtual Machine (FVM).</p>
+                      </CardContent>
+                      <CardFooter>
+                        <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white">
+                          <Link href="https://docs.filecoin.io/smart-contracts/fundamentals/basics/" target="_blank" rel="noopener noreferrer">
+                            Dive into FVM
+                          </Link>
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                    <Card className="bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600">
+                      <CardHeader>
+                        <CardTitle className="text-[#0090FF]">Filecoin Storage Providers</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">Discover the crucial role of storage providers in the Filecoin ecosystem and how to interact with them.</p>
+                      </CardContent>
+                      <CardFooter>
+                        <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white">
+                          <Link href="https://docs.filecoin.io/storage-providers/basics/how-providing-works/" target="_blank" rel="noopener noreferrer">
+                            Explore Storage Provision
+                          </Link>
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
 
-          <TabsContent value="tools">
-            <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-[#0090FF]">Developer Resources</CardTitle>
-                <CardDescription className="text-gray-600 dark:text-gray-400">Essential tools and resources for Filecoin development</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white w-full">
-                    <Link href="https://docs.filecoin.io/" target="_blank" rel="noopener noreferrer">
-                      Filecoin Documentation
-                    </Link>
-                  </Button>
-                  <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white w-full">
-                    <Link href="https://github.com/filecoin-project" target="_blank" rel="noopener noreferrer">
-                      Filecoin GitHub Repositories
-                    </Link>
-                  </Button>
-                  <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white w-full">
-                    <Link href="https://data.lighthouse.storage/" target="_blank" rel="noopener noreferrer">
-                      FVM Data Depot
-                    </Link>
-                  </Button>
-                  <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white w-full">
-                    <Link href="https://faucet.calibration.fildev.network/" target="_blank" rel="noopener noreferrer">
-                      Filecoin Faucet (Calibration Testnet)
-                    </Link>
-                  </Button>
-                  <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white w-full">
-                    <Link href="https://filfox.info/en" target="_blank" rel="noopener noreferrer">
-                      Filfox Block Explorer
-                    </Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="learn">
-            <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-[#0090FF]">Learn Filecoin</CardTitle>
-                <CardDescription className="text-gray-600 dark:text-gray-400">Educational resources and tutorials for Filecoin developers</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <Card className="bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600">
-                    <CardHeader>
-                      <CardTitle className="text-[#0090FF]">Filecoin Fundamentals</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">Understand the core concepts of Filecoin&apos;s decentralized storage network and its underlying technology.</p>
-                    </CardContent>
-                    <CardFooter>
-                      <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white">
-                        <Link href="https://docs.filecoin.io/basics/what-is-filecoin/" target="_blank" rel="noopener noreferrer">
-                          Explore Fundamentals
-                        </Link>
-                      </Button>
-                    </CardFooter>
-                  </Card>
-                  <Card className="bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600">
-                    <CardHeader>
-                      <CardTitle className="text-[#0090FF]">Smart Contract Development</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">Learn to develop and deploy smart contracts on the Filecoin Virtual Machine (FVM).</p>
-                    </CardContent>
-                    <CardFooter>
-                      <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white">
-                        <Link href="https://docs.filecoin.io/smart-contracts/fundamentals/basics/" target="_blank" rel="noopener noreferrer">
-                          Dive into FVM
-                        </Link>
-                      </Button>
-                    </CardFooter>
-                  </Card>
-                  <Card className="bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600">
-                    <CardHeader>
-                      <CardTitle className="text-[#0090FF]">Filecoin Storage Providers</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">Discover the crucial role of storage providers in the Filecoin ecosystem and how to interact with them.</p>
-                    </CardContent>
-                    <CardFooter>
-                      <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white">
-                        <Link href="https://docs.filecoin.io/storage-providers/basics/how-providing-works/" target="_blank" rel="noopener noreferrer">
-                          Explore Storage Provision
-                        </Link>
-                      </Button>
-                    </CardFooter>
-                  </Card>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="test-tokens">
-            <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-[#0090FF]">Obtaining Test Tokens</CardTitle>
-                <CardDescription className="text-gray-600 dark:text-gray-400">How to acquire test tokens for the Filecoin Calibration testnet</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ol className="list-decimal list-inside text-gray-700 dark:text-gray-300 space-y-4">
-                  <li>Configure MetaMask for the Filecoin Calibration testnet. Follow the detailed <Link href="https://docs.filecoin.io/smart-contracts/developing-contracts/metamask-setup/" target="_blank" rel="noopener noreferrer" className="text-[#0090FF] hover:underline">MetaMask setup guide</Link>.</li>
-                  <li>Open MetaMask in your browser and copy your Ethereum-style address (starting with 0x).</li>
-                  <li>Navigate to the <Link href="https://faucet.calibnet.chainsafe-fil.io/" target="_blank" rel="noopener noreferrer" className="text-[#0090FF] hover:underline">Calibration testnet faucet</Link>.</li>
-                  <li>Click &quot;Send Funds&quot;, paste your Ethereum-style address into the address field, and submit the request.</li>
-                  <li>The faucet will provide a transaction ID. Use this ID to track your transaction in a Filecoin block explorer.</li>
-                </ol>
-                <div className="mt-6">
-                  <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white">
-                    <Link href="https://docs.filecoin.io/smart-contracts/developing-contracts/get-test-tokens" target="_blank" rel="noopener noreferrer">
-                      Learn More About Test Tokens
-                    </Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
-      </main>
+            <TabsContent value="test-tokens">
+              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                <CardHeader>
+                  <CardTitle className="text-[#0090FF]">Obtaining Test Tokens</CardTitle>
+                  <CardDescription className="text-gray-600 dark:text-gray-400">How to acquire test tokens for the Filecoin Calibration testnet</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ol className="list-decimal list-inside text-gray-700 dark:text-gray-300 space-y-4">
+                    <li>Configure MetaMask for the Filecoin Calibration testnet. Follow the detailed <Link href="https://docs.filecoin.io/smart-contracts/developing-contracts/metamask-setup/" target="_blank" rel="noopener noreferrer" className="text-[#0090FF] hover:underline">MetaMask setup guide</Link>.</li>
+                    <li>Open MetaMask in your browser and copy your Ethereum-style address (starting with 0x).</li>
+                    <li>Navigate to the <Link href="https://faucet.calibnet.chainsafe-fil.io/" target="_blank" rel="noopener noreferrer" className="text-[#0090FF] hover:underline">Calibration testnet faucet</Link>.</li>
+                    <li>Click &quot;Send Funds&quot;, paste your Ethereum-style address into the address field, and submit the request.</li>
+                    <li>The faucet will provide a transaction ID. Use this ID to track your transaction in a Filecoin block explorer.</li>
+                  </ol>
+                  <div className="mt-6">
+                    <Button asChild className="bg-[#0090FF] hover:bg-[#007ACC] text-white">
+                      <Link href="https://docs.filecoin.io/smart-contracts/developing-contracts/get-test-tokens" target="_blank" rel="noopener noreferrer">
+                        Learn More About Test Tokens
+                      </Link>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </main>
+      </div>
     </div>
   );
 }
