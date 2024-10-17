@@ -497,7 +497,7 @@ queryMinerPower('f01234');
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-gray-900 to-gray-800 text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 min-h-screen flex flex-col">
-        <header className="mb-24"> {/* Increased margin */}
+        <header className="mb-24">
           <div className="flex flex-col sm:flex-row items-center justify-between">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -544,7 +544,7 @@ queryMinerPower('f01234');
           </div>
         </header>
 
-        <main className="flex-grow space-y-32"> {/* Increased space between main sections */}
+        <main className="flex-grow space-y-32">
           {/* Hero Section */}
           <section className="text-center mb-32">
             <div className="flex flex-col items-center gap-10 text-center">
@@ -558,7 +558,7 @@ queryMinerPower('f01234');
               </p>
             </div>
 
-            <div className="flex flex-col items-center gap-10 w-full mt-8"> {/* Added mt-8 for more space */}
+            <div className="flex flex-col items-center gap-10 w-full mt-8">
               <div className="flex items-center bg-gray-900 rounded-lg shadow-md max-w-fit overflow-hidden">
                 <div className="flex">
                   <div className="px-4 py-3 bg-gray-800 text-gray-400 text-sm font-mono">
@@ -652,9 +652,9 @@ queryMinerPower('f01234');
           </section>
 
           {/* Builder Cookbook */}
-          <section className="mb-32"> {/* Increased bottom margin */}
-            <h2 className="text-3xl font-bold text-gray-100 mb-12">Builder Cookbook: Essential Recipes for Developers</h2> {/* Increased margin */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"> {/* Increased gap and bottom margin */}
+          <section className="mb-32">
+            <h2 className="text-3xl font-bold text-gray-100 mb-12">Builder Cookbook: Essential Recipes for Developers</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
               {[
                 { title: "Store Data on Filecoin", href: "https://docs.filecoin.io/builder-cookbook/data-storage/store-data#incentivized-data-storage" },
                 { title: "Retrieve Data from Filecoin", href: "https://docs.filecoin.io/builder-cookbook/data-storage/retrieve-data" },
@@ -698,7 +698,7 @@ queryMinerPower('f01234');
                 </Card>
               ))}
             </div>
-            <div className="flex justify-center mt-12"> {/* Increased top margin */}
+            <div className="flex justify-center mt-12">
               <Button asChild size="lg" className="bg-[#0090FF] hover:bg-[#007ACC] text-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200">
                 <Link href="https://docs.filecoin.io/builder-cookbook/table-of-contents">View All Recipes</Link>
               </Button>
@@ -706,7 +706,7 @@ queryMinerPower('f01234');
           </section>
 
           {/* Get Started Command */}
-          <section className="mb-32"> {/* Increased bottom margin */}
+          <section className="mb-32">
             <h2 className="text-3xl font-bold text-gray-100 mb-8">Get Started with One Command</h2>
             <div className="flex items-center bg-gray-900 rounded-lg shadow-md max-w-fit overflow-hidden">
               <div className="flex">
@@ -732,7 +732,7 @@ queryMinerPower('f01234');
 
           {/* Main Tabs */}
           <Tabs defaultValue="starter-kits" className="w-full">
-            <TabsList className="flex justify-between items-center w-full bg-gray-100 dark:bg-gray-800 rounded-lg p-1 mb-12"> {/* Increased bottom margin */}
+            <TabsList className="flex justify-between items-center w-full bg-gray-100 dark:bg-gray-800 rounded-lg p-1 mb-12">
               {[
                 { id: 'starter-kits', icon: <Code className="w-5 h-5" />, label: 'Starter Kits' },
                 { id: 'developer-tools', icon: <Wrench className="w-5 h-5" />, label: 'Developer Tools' },
@@ -753,7 +753,7 @@ queryMinerPower('f01234');
             </TabsList>
 
             <TabsContent value="starter-kits">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"> {/* Increased gap and bottom margin */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                 {starterKits.map((kit) => (
                   <Card 
                     key={kit.id} 
@@ -795,7 +795,7 @@ queryMinerPower('f01234');
             </TabsContent>
 
             <TabsContent value="developer-tools">
-              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 mb-12"> {/* Added bottom margin */}
+              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 mb-12">
                 <CardHeader>
                   <CardTitle className="text-[#0090FF]">Developer Resources</CardTitle>
                   <CardDescription className="text-gray-600 dark:text-gray-400">Essential tools and resources to accelerate your Filecoin development journey</CardDescription>
@@ -921,7 +921,7 @@ queryMinerPower('f01234');
             </TabsContent>
 
             <TabsContent value="learn">
-              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 mb-12"> {/* Added bottom margin */}
+              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 mb-12">
                 <CardHeader>
                   <CardTitle className="text-[#0090FF]">Learn Filecoin</CardTitle>
                   <CardDescription className="text-gray-600 dark:text-gray-400">Educational resources and tutorials for Filecoin developers</CardDescription>
@@ -979,7 +979,7 @@ queryMinerPower('f01234');
             </TabsContent>
 
             <TabsContent value="test-tokens">
-              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 mb-12"> {/* Added bottom margin */}
+              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 mb-12">
                 <CardHeader>
                   <CardTitle className="text-[#0090FF]">Obtaining Testnet Tokens</CardTitle>
                   <CardDescription className="text-gray-600 dark:text-gray-400">How to acquire testnet tokens for the Filecoin Calibration testnet</CardDescription>
@@ -1005,7 +1005,7 @@ queryMinerPower('f01234');
           </Tabs>
         </main>
 
-        <footer className="mt-32 py-12 border-t border-gray-200 dark:border-gray-700"> {/* Increased top margin and padding */}
+        <footer className="mt-32 py-12 border-t border-gray-200 dark:border-gray-700">
           <div className="flex flex-col sm:flex-row items-center justify-between">
             <div className="mb-4 sm:mb-0">
               <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">What can we do to improve?</h3>
