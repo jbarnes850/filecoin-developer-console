@@ -11,7 +11,7 @@ This project is built with [Next.js](https://nextjs.org/) and offers an interact
 - **Interactive Dashboard**: Explore and select from various Filecoin starter kits.
 - **Developer Tools**: Quick access to essential Filecoin development resources.
 - **Learning Resources**: Curated content to help you understand Filecoin fundamentals.
-- **Test Token Guide**: Instructions for obtaining test tokens on the Filecoin Calibration testnet.
+- **Testnet Token Guide**: Instructions for obtaining testnet tokens on the Filecoin Calibration testnet.
 - **Dark Mode Support**: Toggle between light and dark themes for comfortable viewing.
 
 ## Starter Kits
@@ -56,7 +56,7 @@ We welcome contributions from the community! Whether it's adding new features, i
 
 ## Learn More
 
-To dive deeper into Filecoin development:
+To dive deeper into Filecoin:
 
 - [Filecoin Documentation](https://docs.filecoin.io/)
 - [Filecoin GitHub Repositories](https://github.com/filecoin-project)
