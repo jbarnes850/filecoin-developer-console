@@ -8,6 +8,7 @@ import { Github, Code, Terminal, Database, Cloud, RefreshCw, Copy, Users, Zap, C
 import Link from 'next/link';
 import Image from 'next/image';
 import { useToast } from "@/components/ui/use-toast"
+import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
 type PackageManager = 'npm' | 'yarn' | 'pnpm' | 'bun';
 
@@ -41,15 +42,16 @@ export default function AppPage() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-[#0D0E12] via-[#1A1B26] to-[#2E3348] text-gray-100">
-      <header className="sticky top-0 z-50 w-full border-b border-gray-800 bg-[#0D0E12]/95 backdrop-blur supports-[backdrop-filter]:bg-[#0D0E12]/60">
-        <div className="container mx-auto px-4 flex h-14 items-center justify-between">
+    <div className="flex flex-col min-h-screen bg-[#0D0E12] text-gray-100">
+      <header className="fixed top-0 z-50 w-full border-b border-gray-800 bg-[#0D0E12]/95 backdrop-blur">
+        <div className="container mx-auto px-6 flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
             <Image src="/Filecoin icon.png" alt="Filecoin Logo" width={32} height={32} />
             <span className="font-bold text-2xl text-white">FIL-Frame</span>
           </Link>
-          <nav className="flex items-center space-x-6">
+          <nav className="flex items-center space-x-8">
             <Link href="#features" className="text-sm font-medium text-gray-300 hover:text-white">Features</Link>
+            <Link href="#integrations" className="text-sm font-medium text-gray-300 hover:text-white">Integrations</Link>
             <Link href="#get-started" className="text-sm font-medium text-gray-300 hover:text-white">Get Started</Link>
             <Link href="https://github.com/FIL-Builders/fil-frame" target="_blank" rel="noopener noreferrer">
               <Github className="h-6 w-6 text-gray-300 hover:text-white" />
@@ -58,260 +60,180 @@ export default function AppPage() {
         </div>
       </header>
 
-      <main className="flex-1">
-        <section className="container mx-auto px-4 py-20 text-center">
-          <motion.h1 
-            className="text-6xl font-bold mb-6 text-white"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            FIL-Frame
-          </motion.h1>
-          <motion.p 
-            className="text-xl mb-12 text-gray-200 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            Your quickstart for building apps on Filecoin with ready-to-use React components and TypeScript utilities.
-          </motion.p>
-          <motion.div 
-            className="mb-12 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <Card className="bg-[#1E2029] border-[#2E3039]">
-              <CardContent className="p-0">
-                <div className="flex border-b border-[#2E3039]">
-                  {Object.keys(installCommands).map((cmd) => (
-                    <button
-                      key={cmd}
-                      className={`flex-1 p-2 text-sm font-medium ${activeTab === cmd ? 'bg-[#2E3039] text-white' : 'text-gray-400 hover:text-white'}`}
-                      onClick={() => setActiveTab(cmd as PackageManager)}
+      <main className="flex-1 pt-16">
+        <section className="bg-gradient-to-b from-[#1A1B26] to-[#0D0E12] py-32">
+          <div className="container mx-auto px-6 text-center">
+            <h1 className="text-6xl font-bold mb-6 text-white">FIL-Frame</h1>
+            <p className="text-xl mb-12 text-gray-300 max-w-2xl mx-auto">
+              Your quickstart for building apps on Filecoin with ready-to-use React components and TypeScript utilities.
+            </p>
+            <div className="mb-12 max-w-xl mx-auto">
+              <Card className="bg-[#1E2029] border-[#2E3039]">
+                <CardContent className="p-0">
+                  <div className="flex border-b border-[#2E3039]">
+                    {Object.keys(installCommands).map((cmd) => (
+                      <button
+                        key={cmd}
+                        className={`flex-1 p-2 text-sm font-medium ${activeTab === cmd ? 'bg-[#2E3039] text-white' : 'text-gray-400 hover:text-white'}`}
+                        onClick={() => setActiveTab(cmd as PackageManager)}
+                      >
+                        {cmd}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="p-4 relative">
+                    <pre className="text-left overflow-x-auto whitespace-pre-wrap break-words">
+                      <code className="text-sm font-mono text-gray-200">
+                        {installCommands[activeTab]}
+                      </code>
+                    </pre>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="absolute top-2 right-2 text-gray-400 hover:text-white"
+                      onClick={() => copyToClipboard(installCommands[activeTab])}
                     >
-                      {cmd}
-                    </button>
-                  ))}
-                </div>
-                <div className="p-4 relative">
-                  <pre className="text-left overflow-x-auto whitespace-pre-wrap break-words">
-                    <code className="text-sm font-mono text-gray-200">
-                      {installCommands[activeTab]}
-                    </code>
-                  </pre>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="absolute top-2 right-2 text-gray-400 hover:text-white"
-                    onClick={() => copyToClipboard(installCommands[activeTab])}
-                  >
-                    {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-          <motion.div
-            className="flex justify-center space-x-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-          >
-            <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-full">
-              <Link href="#get-started">Get Started</Link>
-            </Button>
-            <Button 
-              asChild 
-              variant="outline" 
-              size="lg" 
-              className="bg-gray-700 hover:bg-gray-600 text-white border-gray-600 hover:border-gray-500 px-8 py-2 rounded-full"
-            >
-              <Link href="https://github.com/FIL-Builders/fil-frame" target="_blank" rel="noopener noreferrer">
-                <Github className="mr-2 h-5 w-5" />
-                GitHub
-              </Link>
-            </Button>
-          </motion.div>
-        </section>
-
-        <section id="features" className="container mx-auto px-4 py-20">
-          <h2 className="text-4xl font-bold mb-12 text-center text-white">Ready-to-use Filecoin components</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-            <FeatureCard 
-              icon={<Code className="h-10 w-10 text-blue-400" />} 
-              title="Storage Deals" 
-              link="https://docs.filecoin.io/builder-cookbook/data-storage/store-data"
-            />
-            <FeatureCard 
-              icon={<Terminal className="h-10 w-10 text-blue-400" />} 
-              title="Retrieval" 
-              link="https://docs.filecoin.io/builder-cookbook/data-storage/retrieve-data"
-            />
-            <FeatureCard 
-              icon={<Database className="h-10 w-10 text-blue-400" />} 
-              title="Data DAOs" 
-              link="https://docs.filecoin.io/builder-cookbook/dapps/decentralized-database"
-            />
-            <FeatureCard 
-              icon={<Cloud className="h-10 w-10 text-blue-400" />} 
-              title="FVM" 
-              link="https://docs.filecoin.io/smart-contracts/fundamentals/basics/"
-            />
-            <FeatureCard 
-              icon={<RefreshCw className="h-10 w-10 text-blue-400" />} 
-              title="Proofs" 
-              link="https://docs.filecoin.io/basics/how-storage-works/filecoin-plus"
-            />
+                      {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            <div className="flex justify-center space-x-4">
+              <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full">
+                <Link href="#get-started">Get Started</Link>
+              </Button>
+              <Button 
+                asChild 
+                variant="outline" 
+                size="lg" 
+                className="bg-transparent hover:bg-gray-800 text-white border-gray-600 hover:border-gray-500 px-8 py-3 rounded-full"
+              >
+                <Link href="https://github.com/FIL-Builders/fil-frame" target="_blank" rel="noopener noreferrer">
+                  <Github className="mr-2 h-5 w-5" />
+                  GitHub
+                </Link>
+              </Button>
+            </div>
           </div>
         </section>
 
-        <section id="integrations" className="container mx-auto px-4 py-20">
-          <h2 className="text-4xl font-bold mb-12 text-center text-white">Ecosystem Integrations</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <IntegrationCard
-              icon={<Image src="/Lighthouse Logo.jpg" alt="Lighthouse" width={64} height={64} className="rounded-full" />}
-              title="Lighthouse"
-              description="Decentralized storage solutions with perpetual file storage and built-in encryption"
-              link="https://www.lighthouse.storage/"
-            />
-            <IntegrationCard
-              icon={<Image src="/Axelar Logo.svg" alt="Axelar" width={64} height={64} />}
-              title="Axelar"
-              description="Secure cross-chain communication for Web3 applications and assets"
-              link="https://axelar.network/"
-            />
-            <IntegrationCard
-              icon={<Image src="/Lit Logomark White.svg" alt="Lit Protocol" width={64} height={64} />}
-              title="Lit Protocol"
-              description="Decentralized key management network for blockchain-based access control"
-              link="https://litprotocol.com/"
-            />
-          </div>
-          <div className="text-center mt-12">
-            <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-3 rounded-full text-lg">
-              <Link href="https://github.com/FIL-Builders/fil-frame#ecosystem-integrations">
-                Explore All Integrations
-              </Link>
-            </Button>
+        <section id="features" className="py-24 bg-[#0D0E12]">
+          <div className="container mx-auto px-6">
+            <h2 className="text-4xl font-bold mb-16 text-center text-white">Ready-to-use Filecoin Components</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                { icon: <Code className="h-10 w-10 text-blue-400" />, title: "Storage Deals", link: "https://docs.filecoin.io/builder-cookbook/data-storage/store-data" },
+                { icon: <Terminal className="h-10 w-10 text-blue-400" />, title: "Retrieval", link: "https://docs.filecoin.io/builder-cookbook/data-storage/retrieve-data" },
+                { icon: <Database className="h-10 w-10 text-blue-400" />, title: "Data DAOs", link: "https://docs.filecoin.io/builder-cookbook/dapps/decentralized-database" },
+                { icon: <Cloud className="h-10 w-10 text-blue-400" />, title: "FVM", link: "https://docs.filecoin.io/smart-contracts/fundamentals/basics/" },
+                { icon: <RefreshCw className="h-10 w-10 text-blue-400" />, title: "Proofs", link: "https://docs.filecoin.io/basics/how-storage-works/filecoin-plus" },
+                { icon: <Zap className="h-10 w-10 text-blue-400" />, title: "Smart Contracts", link: "https://docs.filecoin.io/smart-contracts/fundamentals/basics/" },
+              ].map((feature, index) => (
+                <FeatureCard key={index} {...feature} />
+              ))}
+            </div>
           </div>
         </section>
 
-        <section id="community" className="container mx-auto px-4 py-20">
-          <h2 className="text-4xl font-bold mb-12 text-center text-white">Build in Community</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card className="bg-[#1E2029] border-[#2E3039] hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
-              <CardContent className="p-6 flex flex-col items-center text-center">
-                <Users className="h-16 w-16 text-blue-400 mb-4" />
-                <h3 className="text-xl font-bold mb-2 text-white">Join the Discussion</h3>
-                <p className="text-gray-300 mb-6">Connect with other Filecoin developers, share ideas, and get help on our community platforms.</p>
-                <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-full">
-                  <Link href="https://t.me/filecoindevs" target="_blank" rel="noopener noreferrer">
-                    Join Telegram Group
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
-            <Card className="bg-[#1E2029] border-[#2E3039] hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
-              <CardContent className="p-6 flex flex-col items-center text-center">
-                <Github className="h-16 w-16 text-blue-400 mb-4" />
-                <h3 className="text-xl font-bold mb-2 text-white">Contribute to FIL-Frame</h3>
-                <p className="text-gray-300 mb-6">Help improve FIL-Frame by contributing to our open-source repository on GitHub.</p>
-                <Button asChild size="lg" className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-2 rounded-full">
-                  <Link href="https://github.com/FIL-Builders/fil-frame" target="_blank" rel="noopener noreferrer">
-                    View on GitHub
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
+        <section id="integrations" className="py-24 bg-[#1A1B26]">
+          <div className="container mx-auto px-6">
+            <h2 className="text-4xl font-bold mb-16 text-center text-white">Ecosystem Integrations</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <IntegrationCard
+                icon={<Image src="/Lighthouse Logo.jpg" alt="Lighthouse" width={64} height={64} className="rounded-full" />}
+                title="Lighthouse"
+                description="Decentralized storage solutions with perpetual file storage and built-in encryption"
+                link="https://www.lighthouse.storage/"
+              />
+              <IntegrationCard
+                icon={<Image src="/Axelar Logo.svg" alt="Axelar" width={64} height={64} />}
+                title="Axelar"
+                description="Secure cross-chain communication for Web3 applications and assets"
+                link="https://axelar.network/"
+              />
+              <IntegrationCard
+                icon={<Image src="/Lit Logomark White.svg" alt="Lit Protocol" width={64} height={64} />}
+                title="Lit Protocol"
+                description="Decentralized key management network for blockchain-based access control"
+                link="https://litprotocol.com/"
+              />
+            </div>
           </div>
         </section>
 
-        <section id="enhanced-experience" className="container mx-auto px-4 py-20">
-          <h2 className="text-4xl font-bold mb-12 text-center text-white">Enhanced dApp Development Experience</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card className="bg-[#1E2029] border-[#2E3039] hover:border-blue-500 transition-all duration-300">
-              <CardContent className="p-6">
-                <Zap className="h-12 w-12 text-yellow-400 mb-4" />
-                <h3 className="text-xl font-bold mb-4 text-white">Supercharged Workflow</h3>
-                <ul className="list-disc list-inside text-gray-300 space-y-2">
-                  <li>Pre-configured development environment for Filecoin</li>
-                  <li>Ready-to-use React components tailored for Filecoin</li>
-                  <li>TypeScript utilities for enhanced productivity</li>
-                </ul>
-              </CardContent>
-            </Card>
-            <Card className="bg-[#1E2029] border-[#2E3039] hover:border-blue-500 transition-all duration-300">
-              <CardContent className="p-6">
-                <RefreshCw className="h-12 w-12 text-green-400 mb-4" />
-                <h3 className="text-xl font-bold mb-4 text-white">Seamless Integration</h3>
-                <ul className="list-disc list-inside text-gray-300 space-y-2">
-                  <li>Easy access to Filecoin&apos;s unique features and APIs</li>
-                  <li>Simplified storage deal creation and management</li>
-                  <li>Built-in support for FVM (Filecoin Virtual Machine)</li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-          <div className="text-center mt-12">
-            <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-3 rounded-full text-lg">
-              <Link href="#get-started">Start Building Now</Link>
-            </Button>
-          </div>
-        </section>
-
-        <section id="get-started" className="container mx-auto px-4 py-20">
-          <h2 className="text-5xl font-bold mb-12 text-center text-white">Get Started in Minutes</h2>
-          <div className="max-w-4xl mx-auto">
-            <Card className="bg-[#1E2029] border-[#2E3039]">
-              <CardContent className="p-8">
-                <div className="space-y-8">
-                  <Step 
-                    number={1} 
-                    title="Create a new FIL-Frame project"
-                    command="npx create-fil-frame my-fil-app"
-                  />
-                  <Step 
-                    number={2} 
-                    title="Navigate to your project directory"
-                    command="cd my-fil-app"
-                  />
-                  <Step 
-                    number={3} 
-                    title="Install dependencies"
-                    command="npm install"
-                  />
-                  <Step 
-                    number={4} 
-                    title="Start the development server"
-                    command="npm run dev"
-                  />
-                </div>
-                <div className="mt-12 text-center">
-                  <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-3 rounded-full text-lg">
-                    <Link href="https://docs.filecoin.io/developers/fil-frame/quickstart">View Full Documentation</Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+        <section id="get-started" className="py-24 bg-[#0D0E12]">
+          <div className="container mx-auto px-6">
+            <h2 className="text-4xl font-bold mb-16 text-center text-white">Get Started in Minutes</h2>
+            <div className="max-w-3xl mx-auto">
+              <Card className="bg-[#1E2029] border-[#2E3039]">
+                <CardContent className="p-8">
+                  <div className="space-y-8">
+                    {[
+                      { number: 1, title: "Create a new FIL-Frame project", command: "npx create-fil-frame my-fil-app" },
+                      { number: 2, title: "Navigate to your project directory", command: "cd my-fil-app" },
+                      { number: 3, title: "Install dependencies", command: "npm install" },
+                      { number: 4, title: "Start the development server", command: "npm run dev" },
+                    ].map((step, index) => (
+                      <Step key={index} {...step} />
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </section>
       </main>
 
-      <footer className="bg-[#1E2029] py-6 border-t border-gray-800">
-        <div className="container mx-auto px-4 flex justify-between items-center">
-          <span className="text-sm text-gray-400">Built with <Heart size={16} className="inline-block mx-1 text-red-500" /> by <Link href="https://x.com/FILBuilders" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400">FIL-B</Link></span>
-          <div className="flex space-x-6">
-            <Link href="https://github.com/FIL-Builders/fil-frame" target="_blank" rel="noopener noreferrer">
-              <Github className="h-6 w-6 text-gray-400 hover:text-white" />
-            </Link>
-            <Link href="https://discord.gg/filecoin" target="_blank" rel="noopener noreferrer">
-              <Image src="/Discord Icon.png" alt="Discord" width={24} height={24} className="text-gray-400 hover:text-white" />
-            </Link>
-            <Link href="https://x.com/FILBuilders" target="_blank" rel="noopener noreferrer">
-              <Image src="/Twitter icon.png" alt="Twitter" width={24} height={24} className="text-gray-400 hover:text-white" />
-            </Link>
+      <footer className="bg-[#1E2029] py-8 border-t border-gray-800">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-wrap justify-between items-start">
+            <div className="w-full md:w-1/2 lg:w-1/3 mb-6 md:mb-0">
+              <Link href="/" className="flex items-center space-x-2 mb-2">
+                <Image src="/Filecoin icon.png" alt="Filecoin Logo" width={24} height={24} />
+                <span className="font-bold text-lg text-white">FIL-Frame</span>
+              </Link>
+              <p className="text-sm text-gray-400 mb-2">
+                Your quickstart for building decentralized apps on Filecoin with ready-to-use React components and TypeScript utilities.
+              </p>
+              <p className="text-xs text-gray-500">
+                Built with <Heart size={12} className="inline-block mx-1 text-red-500" /> by {' '}
+                <Link href="https://x.com/FILBuilders" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400">
+                  FIL-B
+                </Link>
+              </p>
+            </div>
+            <div className="w-full md:w-1/2 lg:w-2/3 flex flex-wrap justify-end">
+              <div className="w-1/2 sm:w-1/3 mb-4 sm:mb-0">
+                <h3 className="text-white font-semibold text-sm mb-2">Resources</h3>
+                <ul className="space-y-1">
+                  <li><Link href="https://github.com/FIL-Builders/fil-frame" className="text-xs text-gray-400 hover:text-white">GitHub Repository</Link></li>
+                  <li><Link href="https://github.com/FIL-Builders/fil-frame/issues" className="text-xs text-gray-400 hover:text-white">Report an Issue</Link></li>
+                </ul>
+              </div>
+              <div className="w-1/2 sm:w-1/3">
+                <h3 className="text-white font-semibold text-sm mb-2">Community</h3>
+                <ul className="space-y-1">
+                  <li><Link href="https://discord.gg/filecoin" className="text-xs text-gray-400 hover:text-white">Discord</Link></li>
+                  <li><Link href="https://x.com/FILBuilders" className="text-xs text-gray-400 hover:text-white">Twitter</Link></li>
+                  <li><Link href="https://filecoin.io/slack" className="text-xs text-gray-400 hover:text-white">Slack</Link></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="mt-6 pt-6 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center">
+            <p className="text-xs text-gray-500 mb-2 sm:mb-0">© 2024 FIL-Frame. All rights reserved.</p>
+            <div className="flex space-x-4">
+              <Link href="https://github.com/FIL-Builders/fil-frame" target="_blank" rel="noopener noreferrer">
+                <Github className="h-5 w-5 text-gray-400 hover:text-white" />
+              </Link>
+              <Link href="https://discord.gg/filecoin" target="_blank" rel="noopener noreferrer">
+                <Image src="/Discord Icon.png" alt="Discord" width={20} height={20} className="text-gray-400 hover:text-white" />
+              </Link>
+              <Link href="https://x.com/FILBuilders" target="_blank" rel="noopener noreferrer">
+                <Image src="/Twitter icon.png" alt="Twitter" width={20} height={20} className="text-gray-400 hover:text-white" />
+              </Link>
+            </div>
           </div>
         </div>
       </footer>
@@ -346,12 +268,30 @@ function DevSurvey({ onClose }: { onClose: () => void }) {
           <CardTitle className="text-white">Developer Survey</CardTitle>
         </CardHeader>
         <CardContent className="p-6">
-          <p className="text-gray-200">We&apos;d love to hear your feedback on FIL-Frame!</p>
-          {/* Add your survey questions here */}
+          <p className="text-gray-200 mb-4">We&apos;d love to hear your feedback on FIL-Frame!</p>
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="experience" className="block text-sm font-medium text-gray-200 mb-1">How was your experience with FIL-Frame?</label>
+              <select id="experience" className="w-full bg-[#2E3039] text-gray-200 border border-gray-600 rounded-md p-2">
+                <option>Excellent</option>
+                <option>Good</option>
+                <option>Average</option>
+                <option>Poor</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="feedback" className="block text-sm font-medium text-gray-200 mb-1">Any additional feedback?</label>
+              <textarea id="feedback" rows={3} className="w-full bg-[#2E3039] text-gray-200 border border-gray-600 rounded-md p-2"></textarea>
+            </div>
+          </div>
         </CardContent>
         <div className="flex justify-end space-x-4 p-6 bg-[#2E3348]">
-          <Button onClick={onClose} variant="outline" className="border-gray-600 text-gray-300 hover:text-white hover:border-gray-400">Close</Button>
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white">Submit</Button>
+          <Button onClick={onClose} variant="outline" className="border-gray-600 text-gray-300 hover:text-white hover:border-gray-400">
+            Close
+          </Button>
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+            Submit
+          </Button>
         </div>
       </Card>
     </div>
