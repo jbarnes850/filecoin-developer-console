@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Github, Code, Terminal, Database, Cloud, RefreshCw, Copy, Users, Zap, Check, Lock, Heart } from 'lucide-react';
+import { Github, Code, Terminal, Database, Cloud, RefreshCw, Copy, Users, Zap, Check, Lock, Heart, ChevronDown, ChevronUp } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useToast } from "@/components/ui/use-toast"
@@ -50,9 +50,9 @@ export default function AppPage() {
             <span className="font-bold text-2xl text-white">FIL-Frame</span>
           </Link>
           <nav className="flex items-center space-x-8">
-            <Link href="#features" className="text-sm font-medium text-gray-300 hover:text-white">Features</Link>
-            <Link href="#integrations" className="text-sm font-medium text-gray-300 hover:text-white">Integrations</Link>
-            <Link href="#get-started" className="text-sm font-medium text-gray-300 hover:text-white">Get Started</Link>
+            <Link href="#features" onClick={(e) => smoothScroll(e, 'features')} className="text-sm font-medium text-gray-300 hover:text-white">Features</Link>
+            <Link href="#integrations" onClick={(e) => smoothScroll(e, 'integrations')} className="text-sm font-medium text-gray-300 hover:text-white">Integrations</Link>
+            <Link href="#get-started" onClick={(e) => smoothScroll(e, 'get-started')} className="text-sm font-medium text-gray-300 hover:text-white">Get Started</Link>
             <Link href="https://github.com/FIL-Builders/fil-frame" target="_blank" rel="noopener noreferrer">
               <Github className="h-6 w-6 text-gray-300 hover:text-white" />
             </Link>
@@ -101,7 +101,7 @@ export default function AppPage() {
             </div>
             <div className="flex justify-center space-x-4">
               <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full">
-                <Link href="#get-started">Get Started</Link>
+                <Link href="#get-started" onClick={(e) => smoothScroll(e, 'get-started')}>Get Started</Link>
               </Button>
               <Button 
                 asChild 
@@ -118,25 +118,51 @@ export default function AppPage() {
           </div>
         </section>
 
-        <section id="features" className="py-24 bg-[#0D0E12]">
+        <section id="features" className="py-24 bg-[#0D0E12] pt-32">
           <div className="container mx-auto px-6">
             <h2 className="text-4xl font-bold mb-16 text-center text-white">Ready-to-use Filecoin Components</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                { icon: <Code className="h-10 w-10 text-blue-400" />, title: "Storage Deals", link: "https://docs.filecoin.io/builder-cookbook/data-storage/store-data" },
-                { icon: <Terminal className="h-10 w-10 text-blue-400" />, title: "Retrieval", link: "https://docs.filecoin.io/builder-cookbook/data-storage/retrieve-data" },
-                { icon: <Database className="h-10 w-10 text-blue-400" />, title: "Data DAOs", link: "https://docs.filecoin.io/builder-cookbook/dapps/decentralized-database" },
-                { icon: <Cloud className="h-10 w-10 text-blue-400" />, title: "FVM", link: "https://docs.filecoin.io/smart-contracts/fundamentals/basics/" },
-                { icon: <RefreshCw className="h-10 w-10 text-blue-400" />, title: "Proofs", link: "https://docs.filecoin.io/basics/how-storage-works/filecoin-plus" },
-                { icon: <Zap className="h-10 w-10 text-blue-400" />, title: "Smart Contracts", link: "https://docs.filecoin.io/smart-contracts/fundamentals/basics/" },
-              ].map((feature, index) => (
-                <FeatureCard key={index} {...feature} />
-              ))}
+              <FeatureCard
+                icon={<Code className="h-10 w-10 text-blue-400" />}
+                title="Storage Deals"
+                link="https://docs.filecoin.io/builder-cookbook/data-storage/store-data"
+                description="Create storage deals via a storage provider like Lighthouse, or use your own deal client smart contract for custom implementations."
+              />
+              <FeatureCard
+                icon={<Terminal className="h-10 w-10 text-blue-400" />}
+                title="Retrieval"
+                link="https://docs.filecoin.io/builder-cookbook/data-storage/retrieve-data"
+                description="Retrieve data from Filecoin storage deals using a retrieval provider like Lit Protocol, or use your own retrieval client smart contract for custom implementations."
+              />
+              <FeatureCard
+                icon={<Database className="h-10 w-10 text-blue-400" />}
+                title="Data DAOs"
+                link="https://docs.filecoin.io/builder-cookbook/dapps/decentralized-database"
+                description="Build decentralized data applications using Filecoin storage deals and data DAOs like Lit Protocol, or use your own data DAO smart contract for custom implementations."
+              />
+              <FeatureCard
+                icon={<Cloud className="h-10 w-10 text-blue-400" />}
+                title="FVM"
+                link="https://docs.filecoin.io/smart-contracts/fundamentals/basics/"
+                description="Build smart contracts on the Filecoin Virtual Machine (FVM) using TypeScript, or use your own smart contract for custom implementations."
+              />
+              <FeatureCard
+                icon={<RefreshCw className="h-10 w-10 text-blue-400" />}
+                title="Proofs"
+                link="https://docs.filecoin.io/basics/how-storage-works/filecoin-plus"
+                description="Generate proofs of storage using Filecoin Plus, or use your own proof generation smart contract for custom implementations."
+              />
+              <FeatureCard
+                icon={<Zap className="h-10 w-10 text-blue-400" />}
+                title="Smart Contracts"
+                link="https://docs.filecoin.io/smart-contracts/fundamentals/basics/"
+                description="Build smart contracts on the Filecoin network using TypeScript, or use your own smart contract for custom implementations."
+              />
             </div>
           </div>
         </section>
 
-        <section id="integrations" className="py-24 bg-[#1A1B26]">
+        <section id="integrations" className="py-24 bg-[#1A1B26] pt-32">
           <div className="container mx-auto px-6">
             <h2 className="text-4xl font-bold mb-16 text-center text-white">Ecosystem Integrations</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -162,9 +188,9 @@ export default function AppPage() {
           </div>
         </section>
 
-        <section id="get-started" className="py-24 bg-[#0D0E12]">
+        <section id="get-started" className="py-24 bg-[#0D0E12] pt-32">
           <div className="container mx-auto px-6">
-            <h2 className="text-4xl font-bold mb-16 text-center text-white">Get Started in Minutes</h2>
+            <h2 className="text-4xl font-bold mb-16 text-center text-white">Builders Ship Faster With FIL-Frame</h2>
             <div className="max-w-3xl mx-auto">
               <Card className="bg-[#1E2029] border-[#2E3039]">
                 <CardContent className="p-8">
@@ -245,17 +271,46 @@ export default function AppPage() {
   );
 }
 
-function FeatureCard({ icon, title, link }: { icon: React.ReactNode; title: string; link: string }) {
+function FeatureCard({ icon, title, link, description }: { icon: React.ReactNode; title: string; link: string; description: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Card className="bg-[#1E2029] border-gray-700 hover:border-blue-500 transition-colors">
+    <Card 
+      className="bg-[#1E2029] border-gray-700 hover:border-blue-500 transition-colors cursor-pointer"
+      onClick={() => setIsOpen(!isOpen)}
+    >
       <CardHeader>
         <CardTitle className="flex flex-col items-center text-center">
           {icon}
-          <Link href={link} target="_blank" rel="noopener noreferrer" className="mt-4 text-lg text-gray-200 hover:text-blue-400">
-            {title}
-          </Link>
+          <span className="mt-4 text-lg text-gray-200">{title}</span>
         </CardTitle>
       </CardHeader>
+      <CardContent className="flex flex-col items-center">
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="mt-4 text-sm text-gray-300 text-center"
+            >
+              <p>{description}</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <Button 
+          asChild 
+          variant="ghost" 
+          size="sm" 
+          className="mt-4 text-gray-400 hover:text-white"
+          onClick={(e) => e.stopPropagation()} // Prevent card from toggling when clicking the link
+        >
+          <Link href={link} target="_blank" rel="noopener noreferrer">
+            Learn More →
+          </Link>
+        </Button>
+      </CardContent>
     </Card>
   );
 }
@@ -358,3 +413,12 @@ function Step({ number, title, command }: { number: number; title: string; comma
     </div>
   );
 }
+
+function smoothScroll(e: React.MouseEvent<HTMLAnchorElement>, targetId: string) {
+  e.preventDefault();
+  const targetElement = document.getElementById(targetId);
+  if (targetElement) {
+    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
