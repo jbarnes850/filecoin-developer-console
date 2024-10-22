@@ -12,6 +12,30 @@ import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
 type PackageManager = 'npm' | 'yarn' | 'pnpm' | 'bun';
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.1,
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 10
+    }
+  }
+};
+
 export default function AppPage() {
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState<PackageManager>('npm');
@@ -62,12 +86,17 @@ export default function AppPage() {
 
       <main className="flex-1 pt-16">
         <section className="bg-gradient-to-b from-[#1A1B26] to-[#0D0E12] py-32">
-          <div className="container mx-auto px-6 text-center">
-            <h1 className="text-6xl font-bold mb-6 text-white">FIL-Frame</h1>
-            <p className="text-xl mb-12 text-gray-300 max-w-2xl mx-auto">
+          <motion.div 
+            className="container mx-auto px-6 text-center"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.h1 variants={itemVariants} className="text-6xl font-bold mb-6 text-white">FIL-Frame</motion.h1>
+            <motion.p variants={itemVariants} className="text-xl mb-12 text-gray-300 max-w-2xl mx-auto">
               Your quickstart for building apps on Filecoin with ready-to-use React components and TypeScript utilities.
-            </p>
-            <div className="mb-12 max-w-xl mx-auto">
+            </motion.p>
+            <motion.div variants={itemVariants} className="mb-12 max-w-xl mx-auto">
               <Card className="bg-[#1E2029] border-[#2E3039]">
                 <CardContent className="p-0">
                   <div className="flex border-b border-[#2E3039]">
@@ -98,8 +127,8 @@ export default function AppPage() {
                   </div>
                 </CardContent>
               </Card>
-            </div>
-            <div className="flex justify-center space-x-4">
+            </motion.div>
+            <motion.div variants={itemVariants} className="flex justify-center space-x-4">
               <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full">
                 <Link href="#get-started" onClick={(e) => smoothScroll(e, 'get-started')}>Get Started</Link>
               </Button>
@@ -114,8 +143,8 @@ export default function AppPage() {
                   GitHub
                 </Link>
               </Button>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </section>
 
         <section id="features" className="py-24 bg-[#0D0E12] pt-32">
@@ -292,7 +321,12 @@ function FeatureCard({ icon, title, link, description }: { icon: React.ReactNode
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 300, 
+                damping: 30,
+                opacity: { duration: 0.2 }
+              }}
               className="mt-4 text-sm text-gray-300 text-center"
             >
               <p>{description}</p>
@@ -303,8 +337,8 @@ function FeatureCard({ icon, title, link, description }: { icon: React.ReactNode
           asChild 
           variant="ghost" 
           size="sm" 
-          className="mt-4 text-gray-400 hover:text-white"
-          onClick={(e) => e.stopPropagation()} // Prevent card from toggling when clicking the link
+          className="mt-4 text-gray-400 hover:text-blue-300"
+          onClick={(e) => e.stopPropagation()}
         >
           <Link href={link} target="_blank" rel="noopener noreferrer">
             Learn More →
@@ -341,7 +375,7 @@ function DevSurvey({ onClose }: { onClose: () => void }) {
           </div>
         </CardContent>
         <div className="flex justify-end space-x-4 p-6 bg-[#2E3348]">
-          <Button onClick={onClose} variant="outline" className="border-gray-600 text-gray-300 hover:text-white hover:border-gray-400">
+          <Button onClick={onClose} className="bg-black text-white hover:bg-gray-800">
             Close
           </Button>
           <Button className="bg-blue-600 hover:bg-blue-700 text-white">
@@ -362,7 +396,7 @@ function IntegrationCard({ icon, title, description, link }: { icon: React.React
         </div>
         <h3 className="text-xl font-bold mb-2 text-white">{title}</h3>
         <p className="text-gray-300 mb-6">{description}</p>
-        <Button asChild variant="ghost" size="sm" className="text-gray-400 hover:text-white">
+        <Button asChild variant="ghost" size="sm" className="text-gray-400 hover:text-blue-300">
           <Link href={link} target="_blank" rel="noopener noreferrer">
             Learn More →
           </Link>
