@@ -35,6 +35,10 @@ const itemVariants = {
   }
 };
 
+// Remove Quicksand import and initialization since it's now in layout.tsx
+
+// Rest of your existing code...
+
 export default function AppPage() {
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState<PackageManager>('npm');
@@ -132,7 +136,7 @@ export default function AppPage() {
           >
             <motion.h1 
               variants={itemVariants} 
-              className="font-bold text-6xl mb-6 text-white"
+              className="font-balgin text-6xl mb-6 text-white uppercase tracking-none"
             >
               FIL-Frame
             </motion.h1>
@@ -140,17 +144,20 @@ export default function AppPage() {
               Your quickstart for building apps on Filecoin with ready-to-use React components and TypeScript utilities.
             </motion.p>
             <motion.div variants={itemVariants} className="mb-12 max-w-xl mx-auto">
-              <Card className="bg-[#1E2029] border-[#2E3039] hover:border-[#0090FF] transition-all duration-300 shadow-lg shadow-black/10">
+              <Card className="bg-[#1E2029] border-[#2E3039] hover:border-[#0090FF] transition-all duration-300 shadow-lg shadow-black/10 overflow-hidden"> {/* Added overflow-hidden */}
                 <CardContent className="p-0">
                   <div className="flex border-b border-[#2E3039]">
-                    {Object.keys(installCommands).map((cmd) => (
+                    {Object.keys(installCommands).map((cmd, index) => (
                       <button
                         key={cmd}
-                        className={`flex-1 p-2 text-sm font-medium flex items-center justify-center ${
-                          activeTab === cmd 
+                        className={`flex-1 p-2 text-sm font-medium flex items-center justify-center transition-colors
+                          ${activeTab === cmd 
                             ? 'bg-[#2E3039] text-white' 
                             : 'text-gray-400 hover:text-white'
-                        }`}
+                          }
+                          ${index === 0 ? 'rounded-tl-[calc(0.5rem-1px)]' : ''} 
+                          ${index === Object.keys(installCommands).length - 1 ? 'rounded-tr-[calc(0.5rem-1px)]' : ''}
+                        `}
                         onClick={() => setActiveTab(cmd as PackageManager)}
                       >
                         {cmd}
@@ -240,7 +247,7 @@ export default function AppPage() {
             <div className="relative">
               <div className="absolute -left-8 top-1/2 w-4 h-0.5 bg-[#0090FF] opacity-20 transform -rotate-[13.6deg]" />
               <div className="absolute -right-8 top-1/2 w-4 h-0.5 bg-[#0090FF] opacity-20 transform rotate-[13.6deg]" />
-              <h2 className="text-4xl font-bold mb-16 text-center text-white relative">
+              <h2 className="font-balgin text-4xl mb-16 text-center text-white uppercase tracking-none">
                 Ready-to-use Filecoin Components
                 {/* Geometric accent */}
                 <div className="absolute -right-4 -top-4 w-8 h-8 opacity-10">
@@ -586,8 +593,8 @@ function IntegrationCard({ icon, title, description, link }: { icon: React.React
         <div className="mb-4">
           {icon}
         </div>
-        <h3 className="text-xl font-bold mb-2 text-white">{title}</h3>
-        <p className="text-gray-300 mb-6">{description}</p>
+        <h3 className="title text-xl font-bold mb-2 text-white">{title}</h3>
+        <p className="paragraph text-gray-300 mb-6">{description}</p>
         <Button asChild variant="ghost" size="sm" className="text-gray-400 hover:text-blue-300">
           <Link href={link} target="_blank" rel="noopener noreferrer">
             Learn More →
@@ -647,4 +654,3 @@ function smoothScroll(e: React.MouseEvent<HTMLAnchorElement>, targetId: string) 
     targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
-

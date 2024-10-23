@@ -10,16 +10,25 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Balgin';
+  src: url('/fonts/Balgin-Black.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+}
+
 :root {
   /* Brand Colors */
   --fil-blue: #0090FF;
   --fil-secondary: #FA4747;
   --fil-yellow: #FFE05F;
   
+  /* Updated Background Colors - Even lighter gradient */
+  --background-start: #22232F;  /* Lightened from #1E1F2A */
+  --background-end: #16171F;    /* Lightened from #12131A */
+  
   /* Background Colors */
-  --background-start: #1A1B26;
-  --background-end: #0D0E12;
-  --card-bg: #1E2029;
+  --card-bg: #1F2030;          /* Lightened from #1E2029 */
   --border-color: #2E3039;
   
   /* UI colors */
@@ -150,8 +159,8 @@
   --fil-secondary: #FA4747;
   --fil-yellow: #FFE05F;
   
-  --background-start: #1A1B26;
-  --background-end: #0D0E12;
+  --background-start: #1E1F2A;
+  --background-end: #12131A;
   
   /* Add geometric shape angles */
   --angle-1: 7.07deg;
@@ -171,7 +180,7 @@
 
 /* Add styles for feature cards */
 .feature-card {
-  @apply bg-[#1E2029] border border-[#2E3039] hover:border-[#0090FF] transition-all duration-300 transform hover:-translate-y-1;
+  @apply bg-[#1F2030] border border-[#2E3039] hover:border-[#0090FF] transition-all duration-300 transform hover:-translate-y-1;
   position: relative;
   overflow: hidden;
 }
@@ -213,4 +222,80 @@
 
 .btn-primary:hover {
   opacity: 0.9;
+}
+
+/* Typography */
+h1, h2 {
+  font-family: 'Balgin', system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: 'Quicksand', system-ui, sans-serif;
+  font-weight: bold;
+  letter-spacing: 0;
+  font-size: 1.25rem; /* Increased from 1rem */
+}
+
+.subtitle {
+  font-family: 'Quicksand', system-ui, sans-serif;
+  font-weight: medium;
+  font-size: 1.125rem; /* Increased from 0.667em */
+  letter-spacing: 0;
+}
+
+.paragraph {
+  font-family: 'Quicksand', system-ui, sans-serif;
+  font-weight: regular;
+  font-size: 1.125rem; /* Increased from 1rem */
+  letter-spacing: 0;
+  line-height: 1.6; /* Added for better readability */
+}
+
+/* Update background gradient */
+body {
+  background: linear-gradient(to bottom, var(--background-start), var(--background-end));
+}
+
+/* Make geometric shapes more visible against lighter background */
+.geometric-shape {
+  opacity: 0.25;  /* Increased from 0.2 for better visibility */
+}
+
+/* Update card text sizes */
+.feature-card h3 {
+  font-size: 1.375rem; /* Increased from 1.25rem */
+}
+
+.feature-card p {
+  font-size: 1.125rem; /* Increased from 1rem */
+}
+
+/* Update integration card text */
+.integration-card h3 {
+  font-size: 1.375rem;
+}
+
+.integration-card p {
+  font-size: 1.125rem;
+}
+
+/* Update section descriptions */
+.section-description {
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+/* Update header background */
+header {
+  @apply bg-[#1F2030]/95;  /* Lightened to match new theme */
+}
+
+/* Update any specific card styles */
+.card, 
+.integration-card,
+[class*="bg-[#1E2029]"] {
+  background-color: #1F2030;  /* Update all card backgrounds */
 }
