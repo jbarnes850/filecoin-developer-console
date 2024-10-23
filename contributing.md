@@ -33,25 +33,25 @@ This is an early version of the Filecoin Developer Console and Starter Kit. We'r
 1. Clone your fork of the repository.
 2. Install dependencies:
 
-   ```
+   ```bash
    npm install
    ```
 
    or
 
-   ```
+   ```bash
    yarn install
    ```
 
 3. Run the development server:
 
-   ```
+   ```bash
    npm run dev
    ```
 
    or
 
-   ```
+   ```bash
    yarn dev
    ```
 

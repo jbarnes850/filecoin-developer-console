@@ -8,7 +8,6 @@ import { Github, Code, Terminal, Database, Cloud, RefreshCw, Copy, Users, Zap, C
 import Link from 'next/link';
 import Image from 'next/image';
 import { useToast } from "@/components/ui/use-toast"
-import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
 type PackageManager = 'npm' | 'yarn' | 'pnpm' | 'bun';
 
@@ -59,19 +58,27 @@ export default function AppPage() {
     bun: 'bun add @FIL-Builders/fil-frame'
   };
 
-  // Add this useEffect to show the survey after a delay
   React.useEffect(() => {
-    const timer = setTimeout(() => setShowSurvey(true), 60000); // Show survey after 1 minute
+    const timer = setTimeout(() => setShowSurvey(true), 60000); // Show survey after 1 minute.
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <div className="flex flex-col min-h-screen bg-[#0D0E12] text-gray-100">
-      <header className="fixed top-0 z-50 w-full border-b border-gray-800 bg-[#0D0E12]/95 backdrop-blur">
+      <header className="fixed top-0 z-50 w-full border-b border-[#2E3039] bg-[#1A1B26]/95 backdrop-blur">
         <div className="container mx-auto px-6 flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <Image src="/Filecoin icon.png" alt="Filecoin Logo" width={32} height={32} />
-            <span className="font-bold text-2xl text-white">FIL-Frame</span>
+            <div className="relative w-8 h-8 flex items-center">
+              <Image 
+                src="/fil B icon.png"
+                alt="Fil B Logo" 
+                width={32}
+                height={32}
+                className="object-contain"
+                priority
+              />
+            </div>
+            <span className="font-bold text-xl text-[#0090FF] leading-none">FIL-Frame</span>
           </Link>
           <nav className="flex items-center space-x-8">
             <Link href="#features" onClick={(e) => smoothScroll(e, 'features')} className="text-sm font-medium text-gray-300 hover:text-white">Features</Link>
@@ -85,25 +92,65 @@ export default function AppPage() {
       </header>
 
       <main className="flex-1 pt-16">
-        <section className="bg-gradient-to-b from-[#1A1B26] to-[#0D0E12] py-32">
+        <section className="bg-gradient-to-b from-[#1A1B26] to-[#0D0E12] py-32 relative overflow-hidden">
+          {/* Brand geometric shapes */}
+          <div className="absolute inset-0 pointer-events-none">
+            <Image 
+              src="/Red Arrow.png"
+              alt=""
+              width={120}
+              height={120}
+              className="absolute top-[35%] right-[10%] transform -rotate-[45deg] opacity-15"
+            />
+            <Image 
+              src="/Blue Square.png"
+              alt=""
+              width={100}
+              height={100}
+              className="absolute top-[20%] left-[8%] transform rotate-[13.6deg] opacity-10"
+            />
+            <Image 
+              src="/Yellow Circle.png"
+              alt=""
+              width={90}
+              height={90}
+              className="absolute bottom-[35%] right-[15%] transform rotate-[10.38deg] opacity-10"
+            />
+            <Image 
+              src="/Red Star.png"
+              alt=""
+              width={80}
+              height={80}
+              className="absolute bottom-[25%] left-[12%] transform rotate-[7.07deg] opacity-10"
+            />
+          </div>
           <motion.div 
             className="container mx-auto px-6 text-center"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
-            <motion.h1 variants={itemVariants} className="text-6xl font-bold mb-6 text-white">FIL-Frame</motion.h1>
+            <motion.h1 
+              variants={itemVariants} 
+              className="font-bold text-6xl mb-6 text-white"
+            >
+              FIL-Frame
+            </motion.h1>
             <motion.p variants={itemVariants} className="text-xl mb-12 text-gray-300 max-w-2xl mx-auto">
               Your quickstart for building apps on Filecoin with ready-to-use React components and TypeScript utilities.
             </motion.p>
             <motion.div variants={itemVariants} className="mb-12 max-w-xl mx-auto">
-              <Card className="bg-[#1E2029] border-[#2E3039]">
+              <Card className="bg-[#1E2029] border-[#2E3039] hover:border-[#0090FF] transition-all duration-300 shadow-lg shadow-black/10">
                 <CardContent className="p-0">
                   <div className="flex border-b border-[#2E3039]">
                     {Object.keys(installCommands).map((cmd) => (
                       <button
                         key={cmd}
-                        className={`flex-1 p-2 text-sm font-medium ${activeTab === cmd ? 'bg-[#2E3039] text-white' : 'text-gray-400 hover:text-white'}`}
+                        className={`flex-1 p-2 text-sm font-medium flex items-center justify-center ${
+                          activeTab === cmd 
+                            ? 'bg-[#2E3039] text-white' 
+                            : 'text-gray-400 hover:text-white'
+                        }`}
                         onClick={() => setActiveTab(cmd as PackageManager)}
                       >
                         {cmd}
@@ -129,8 +176,14 @@ export default function AppPage() {
               </Card>
             </motion.div>
             <motion.div variants={itemVariants} className="flex justify-center space-x-4">
-              <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full">
-                <Link href="#get-started" onClick={(e) => smoothScroll(e, 'get-started')}>Get Started</Link>
+              <Button 
+                asChild 
+                size="lg" 
+                className="bg-[#0090FF] hover:bg-[#0090FF]/90 text-white font-bold px-8 py-3 rounded-full"
+              >
+                <Link href="#get-started" onClick={(e) => smoothScroll(e, 'get-started')}>
+                  Get Started
+                </Link>
               </Button>
               <Button 
                 asChild 
@@ -147,42 +200,95 @@ export default function AppPage() {
           </motion.div>
         </section>
 
-        <section id="features" className="py-24 bg-[#0D0E12] pt-32">
-          <div className="container mx-auto px-6">
-            <h2 className="text-4xl font-bold mb-16 text-center text-white">Ready-to-use Filecoin Components</h2>
+        <section id="features" className="py-24 bg-[#0D0E12] pt-32 relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none">
+            <Image 
+              src="/Blue Square.png"
+              alt=""
+              width={80}
+              height={80}
+              className="absolute top-[5%] left-[5%] transform rotate-[7.07deg] opacity-5"
+            />
+            <Image 
+              src="/Yellow Circle.png"
+              alt=""
+              width={70}
+              height={70}
+              className="absolute top-[10%] right-[8%] transform rotate-[10.38deg] opacity-5"
+            />
+            <Image 
+              src="/Red Star.png"
+              alt=""
+              width={60}
+              height={60}
+              className="absolute bottom-[8%] left-[10%] transform rotate-[13.6deg] opacity-5"
+            />
+            <Image 
+              src="/Red Arrow.png"
+              alt=""
+              width={70}
+              height={70}
+              className="absolute bottom-[10%] right-[5%] transform rotate-[7.07deg] opacity-5"
+            />
+          </div>
+
+          <div className="container mx-auto px-6 relative">
+            {/* Line decoration */}
+            <div className="absolute left-0 top-24 w-16 h-0.5 bg-[#0090FF] opacity-20 transform -rotate-[13.6deg]" />
+            <div className="absolute right-0 top-24 w-16 h-0.5 bg-[#0090FF] opacity-20 transform rotate-[13.6deg]" />
+            
+            <div className="relative">
+              <div className="absolute -left-8 top-1/2 w-4 h-0.5 bg-[#0090FF] opacity-20 transform -rotate-[13.6deg]" />
+              <div className="absolute -right-8 top-1/2 w-4 h-0.5 bg-[#0090FF] opacity-20 transform rotate-[13.6deg]" />
+              <h2 className="text-4xl font-bold mb-16 text-center text-white relative">
+                Ready-to-use Filecoin Components
+                {/* Geometric accent */}
+                <div className="absolute -right-4 -top-4 w-8 h-8 opacity-10">
+                  <Image 
+                    src="/Blue Square.png"
+                    alt=""
+                    width={32}
+                    height={32}
+                    className="transform rotate-[7.07deg]"
+                  />
+                </div>
+              </h2>
+            </div>
+
+            {/* Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <FeatureCard
-                icon={<Code className="h-10 w-10 text-blue-400" />}
+                icon={<Code className="h-10 w-10 text-[#0090FF]" />}
                 title="Storage Deals"
                 link="https://docs.filecoin.io/builder-cookbook/data-storage/store-data"
                 description="Create storage deals via a storage provider like Lighthouse, or use your own deal client smart contract for custom implementations."
               />
               <FeatureCard
-                icon={<Terminal className="h-10 w-10 text-blue-400" />}
+                icon={<Terminal className="h-10 w-10 text-[#0090FF]" />}
                 title="Retrieval"
                 link="https://docs.filecoin.io/builder-cookbook/data-storage/retrieve-data"
                 description="Retrieve data from Filecoin storage deals using a retrieval provider like Lit Protocol, or use your own retrieval client smart contract for custom implementations."
               />
               <FeatureCard
-                icon={<Database className="h-10 w-10 text-blue-400" />}
+                icon={<Database className="h-10 w-10 text-[#0090FF]" />}
                 title="Data DAOs"
                 link="https://docs.filecoin.io/builder-cookbook/dapps/decentralized-database"
                 description="Build decentralized data applications using Filecoin storage deals and data DAOs like Lit Protocol, or use your own data DAO smart contract for custom implementations."
               />
               <FeatureCard
-                icon={<Cloud className="h-10 w-10 text-blue-400" />}
+                icon={<Cloud className="h-10 w-10 text-[#0090FF]" />}
                 title="FVM"
                 link="https://docs.filecoin.io/smart-contracts/fundamentals/basics/"
                 description="Build smart contracts on the Filecoin Virtual Machine (FVM) using TypeScript, or use your own smart contract for custom implementations."
               />
               <FeatureCard
-                icon={<RefreshCw className="h-10 w-10 text-blue-400" />}
+                icon={<RefreshCw className="h-10 w-10 text-[#0090FF]" />}
                 title="Proofs"
                 link="https://docs.filecoin.io/basics/how-storage-works/filecoin-plus"
                 description="Generate proofs of storage using Filecoin Plus, or use your own proof generation smart contract for custom implementations."
               />
               <FeatureCard
-                icon={<Zap className="h-10 w-10 text-blue-400" />}
+                icon={<Zap className="h-10 w-10 text-[#0090FF]" />}
                 title="Smart Contracts"
                 link="https://docs.filecoin.io/smart-contracts/fundamentals/basics/"
                 description="Build smart contracts on the Filecoin network using TypeScript, or use your own smart contract for custom implementations."
@@ -193,33 +299,114 @@ export default function AppPage() {
 
         <section id="integrations" className="py-24 bg-[#1A1B26] pt-32">
           <div className="container mx-auto px-6">
-            <h2 className="text-4xl font-bold mb-16 text-center text-white">Ecosystem Integrations</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <IntegrationCard
-                icon={<Image src="/Lighthouse Logo.jpg" alt="Lighthouse" width={64} height={64} className="rounded-full" />}
-                title="Lighthouse"
-                description="Decentralized storage solutions with perpetual file storage and built-in encryption"
-                link="https://www.lighthouse.storage/"
-              />
-              <IntegrationCard
-                icon={<Image src="/Axelar Logo.svg" alt="Axelar" width={64} height={64} />}
-                title="Axelar"
-                description="Secure cross-chain communication for Web3 applications and assets"
-                link="https://axelar.network/"
-              />
-              <IntegrationCard
-                icon={<Image src="/Lit Logomark White.svg" alt="Lit Protocol" width={64} height={64} />}
-                title="Lit Protocol"
-                description="Decentralized key management network for blockchain-based access control"
-                link="https://litprotocol.com/"
-              />
+            {/* Storage Onramps */}
+            <div className="mb-24">
+              <h2 className="text-4xl font-bold mb-6 text-center text-white">Easy Storage and Retrieval with Storage Onramps</h2>
+              <p className="text-gray-300 text-center mb-16 max-w-3xl mx-auto">
+                Get started quickly with battle-tested storage providers and onramps for seamless data management on Filecoin.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <IntegrationCard
+                  icon={<Image src="/Lighthouse Logo.jpg" alt="Lighthouse" width={64} height={64} className="rounded-full" />}
+                  title="Lighthouse"
+                  description="Decentralized storage solutions with perpetual file storage and built-in encryption"
+                  link="https://www.lighthouse.storage/"
+                />
+                <IntegrationCard
+                  icon={<Image 
+                    src="/Storacha.png" 
+                    alt="Storacha" 
+                    width={64} 
+                    height={64} 
+                    className="rounded-full"
+                  />}
+                  title="Storacha"
+                  description="Simplified storage management and deal-making for Filecoin network"
+                  link="https://github.com/FIL-Builders/fil-frame/tree/storacha-nfts"
+                />
+                <IntegrationCard
+                  icon={<Image 
+                    src="/Akave.png" 
+                    alt="Akave" 
+                    width={64} 
+                    height={64}
+                    className="rounded-full"
+                  />}
+                  title="Akave"
+                  description="Enterprise-grade storage solutions with advanced data management features"
+                  link="https://akave.io/"
+                />
+              </div>
+            </div>
+
+            {/* Tooling */}
+            <div>
+              <h2 className="text-4xl font-bold mb-6 text-center text-white">Supercharge Your dApp</h2>
+              <p className="text-gray-300 text-center mb-16 max-w-3xl mx-auto">
+                Enhance your decentralized applications with powerful cross-chain and access control capabilities.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <IntegrationCard
+                  icon={<Image src="/Axelar Logo.svg" alt="Axelar" width={64} height={64} />}
+                  title="Axelar"
+                  description="Secure cross-chain communication for Web3 applications and assets"
+                  link="https://axelar.network/"
+                />
+                <IntegrationCard
+                  icon={<Image src="/Lit Logomark White.svg" alt="Lit Protocol" width={64} height={64} />}
+                  title="Lit Protocol"
+                  description="Decentralized key management network for blockchain-based access control"
+                  link="https://litprotocol.com/"
+                />
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="get-started" className="py-24 bg-[#0D0E12] pt-32">
-          <div className="container mx-auto px-6">
-            <h2 className="text-4xl font-bold mb-16 text-center text-white">Builders Ship Faster With FIL-Frame</h2>
+        <section id="get-started" className="py-24 bg-[#0D0E12] pt-32 relative overflow-hidden">
+          {/* Geometric shapes */}
+          <div className="absolute inset-0 pointer-events-none">
+            <Image 
+              src="/Blue Square.png"
+              alt=""
+              width={80}
+              height={80}
+              className="absolute top-[8%] right-[5%] transform rotate-[7.07deg] opacity-5"
+            />
+            <Image 
+              src="/Red Arrow.png"
+              alt=""
+              width={70}
+              height={70}
+              className="absolute top-[15%] left-[8%] transform rotate-[13.6deg] opacity-5"
+            />
+            <Image 
+              src="/Yellow Circle.png"
+              alt=""
+              width={60}
+              height={60}
+              className="absolute bottom-[10%] right-[12%] transform rotate-[10.38deg] opacity-5"
+            />
+          </div>
+
+          <div className="container mx-auto px-6 relative">
+            {/* Line decoration */}
+            <div className="absolute left-0 top-24 w-16 h-0.5 bg-[#0090FF] opacity-20 transform -rotate-[13.6deg]" />
+            <div className="absolute right-0 top-24 w-16 h-0.5 bg-[#0090FF] opacity-20 transform rotate-[13.6deg]" />
+            
+            <h2 className="text-4xl font-bold mb-16 text-center text-white relative">
+              Builders Ship Faster With FIL-Frame
+              <div className="absolute -right-4 -top-4 w-8 h-8 opacity-10">
+                <Image 
+                  src="/Red Star.png"
+                  alt=""
+                  width={32}
+                  height={32}
+                  className="transform rotate-[7.07deg]"
+                />
+              </div>
+            </h2>
+
             <div className="max-w-3xl mx-auto">
               <Card className="bg-[#1E2029] border-[#2E3039]">
                 <CardContent className="p-8">
@@ -240,22 +427,27 @@ export default function AppPage() {
         </section>
       </main>
 
-      <footer className="bg-[#1E2029] py-8 border-t border-gray-800">
+      <footer className="bg-[#1E2029] py-8 border-t border-[#2E3039]">
         <div className="container mx-auto px-6">
           <div className="flex flex-wrap justify-between items-start">
-            <div className="w-full md:w-1/2 lg:w-1/3 mb-6 md:mb-0">
+            <div className="w-full md:w-1/3 mb-6 md:mb-0">
               <Link href="/" className="flex items-center space-x-2 mb-2">
-                <Image src="/Filecoin icon.png" alt="Filecoin Logo" width={24} height={24} />
-                <span className="font-bold text-lg text-white">FIL-Frame</span>
+                <div className="relative w-6 h-6">
+                  <Image 
+                    src="/fil B icon.png"
+                    alt="Fil B Logo" 
+                    width={24}
+                    height={24}
+                    className="object-contain"
+                  />
+                </div>
+                <span className="font-bold text-lg text-[#0090FF]">FIL-Frame</span>
               </Link>
               <p className="text-sm text-gray-400 mb-2">
                 Your quickstart for building decentralized apps on Filecoin with ready-to-use React components and TypeScript utilities.
               </p>
               <p className="text-xs text-gray-500">
-                Built with <Heart size={12} className="inline-block mx-1 text-red-500" /> by {' '}
-                <Link href="https://x.com/FILBuilders" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400">
-                  FIL-B
-                </Link>
+                Built with <Heart size={12} className="inline-block mx-1 text-red-500" /> by FIL-B
               </p>
             </div>
             <div className="w-full md:w-1/2 lg:w-2/3 flex flex-wrap justify-end">

@@ -2,77 +2,81 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Add font face declaration */
+@font-face {
+  font-family: 'Royce';
+  src: url('/fonts/Royce-Extrabold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-.dark {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  /* Brand Colors */
+  --fil-blue: #0090FF;
+  --fil-secondary: #FA4747;
+  --fil-yellow: #FFE05F;
+  
+  /* Background Colors */
+  --background-start: #1A1B26;
+  --background-end: #0D0E12;
+  --card-bg: #1E2029;
+  --border-color: #2E3039;
+  
+  /* UI colors */
+  --foreground: 255, 255, 255;
+  
+  /* Brand-specific tokens */
+  --brand-gradient: linear-gradient(
+    to bottom,
+    var(--background-start),
+    var(--background-end)
+  );
+  
+  /* Mathematical Elements */
+  --integral-rotation: 10.38deg;
+  --bar-rotation: 13.6deg;
+  
+  /* Brand rotations */
+  --rotation-1: 7.07deg;
+  --rotation-2: 13.6deg;
+  --rotation-3: 10.38deg;
 }
 
 @layer base {
-  :root {
-    --background: 0 0% 98%; /* Adjusted to be closer to white */
-    --foreground: 222 47% 11%;
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
-    --primary: 201 100% 50%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222 47% 11%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222 47% 11%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 201 100% 50%;
-    --radius: 0.5rem;
+  body {
+    background: var(--brand-gradient);
+    color: rgb(var(--foreground));
+    font-family: system-ui, -apple-system, sans-serif;
   }
-  .dark {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 11%;
+
+  /* Brand typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-weight: 700;
+  }
+
+  /* Update component theme */
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --card: 26 27 38;
     --card-foreground: 210 40% 98%;
-    --popover: 222 47% 11%;
+    --popover: 26 27 38;
     --popover-foreground: 210 40% 98%;
-    --primary: 201 100% 50%;
-    --primary-foreground: 222 47% 11%;
-    --secondary: 217.2 32.6% 17.5%;
+    --primary: 201 100% 50%; /* Fil B Blue */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 0 71% 63%; /* Fil B Secondary */
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 60 100% 69%; /* Fil B Yellow */
+    --accent-foreground: 222 47% 11%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 201 100% 50%;
+    --ring: var(--fil-blue);
+    --radius: 0.5rem;
   }
 }
 
@@ -95,4 +99,118 @@ body {
   html {
     font-size: 12px;
   }
+}
+
+/* Update typography */
+.font-royce {
+  font-family: var(--font-royce);
+}
+
+/* Add mathematical element styles */
+.integral-symbol {
+  transform: rotate(10.38deg);
+  display: inline-block;
+  font-family: serif;
+}
+
+.horizontal-bar {
+  transform: rotate(13.6deg);
+  transform-origin: left center;
+}
+
+/* Brand color utilities */
+.bg-fil-blue {
+  background-color: var(--fil-blue);
+}
+
+.bg-fil-secondary {
+  background-color: var(--fil-secondary);
+}
+
+.bg-fil-yellow {
+  background-color: var(--fil-yellow);
+}
+
+/* Geometric shape rotations */
+.rotate-fil-1 {
+  transform: rotate(7.07deg);
+}
+
+.rotate-fil-2 {
+  transform: rotate(13.6deg);
+}
+
+.rotate-fil-3 {
+  transform: rotate(10.38deg);
+}
+
+/* Update existing color variables */
+:root {
+  --fil-blue: #0090FF;
+  --fil-secondary: #FA4747;
+  --fil-yellow: #FFE05F;
+  
+  --background-start: #1A1B26;
+  --background-end: #0D0E12;
+  
+  /* Add geometric shape angles */
+  --angle-1: 7.07deg;
+  --angle-2: 13.6deg;
+  --angle-3: 10.38deg;
+}
+
+/* Component theme updates */
+@layer base {
+  :root {
+    --primary: var(--fil-blue);
+    --secondary: var(--fil-secondary);
+    --accent: var(--fil-yellow);
+    /* ... other theme variables ... */
+  }
+}
+
+/* Add styles for feature cards */
+.feature-card {
+  @apply bg-[#1E2029] border border-[#2E3039] hover:border-[#0090FF] transition-all duration-300 transform hover:-translate-y-1;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  background: var(--fil-blue);
+  opacity: 0.05;
+  border-bottom-left-radius: 0.5rem;
+  transform: rotate(var(--rotation-1)) translate(20px, -20px);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover::before {
+  transform: rotate(var(--rotation-2)) translate(10px, -10px);
+  opacity: 0.1;
+}
+
+/* Card hover effects */
+.feature-card {
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--fil-blue);
+}
+
+/* Button styles */
+.btn-primary {
+  background-color: var(--fil-blue);
+  transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
 }
