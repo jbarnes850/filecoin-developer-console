@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Add font face declaration */
 @font-face {
   font-family: 'Royce';
   src: url('/fonts/Royce-Extrabold.woff2') format('woff2');
@@ -12,7 +11,7 @@
 
 @font-face {
   font-family: 'Balgin';
-  src: url('/fonts/Balgin-Black.woff2') format('woff2');
+  src: url('/fonts/Balgin-Black.ttf') format('ttf');
   font-weight: 800;
   font-style: normal;
 }
