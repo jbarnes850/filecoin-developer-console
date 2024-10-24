@@ -35,10 +35,6 @@ const itemVariants = {
   }
 };
 
-// Remove Quicksand import and initialization since it's now in layout.tsx
-
-// Rest of your existing code...
-
 export default function AppPage() {
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState<PackageManager>('npm');
@@ -71,11 +67,20 @@ export default function AppPage() {
     <div className="flex flex-col min-h-screen bg-[#0D0E12] text-gray-100">
       <header className="fixed top-0 z-50 w-full border-b border-[#2E3039] bg-[#1A1B26]/95 backdrop-blur">
         <div className="container mx-auto px-6 flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="relative w-8 h-8 flex items-center">
+          <Link href="/" className="flex items-center space-x-4"> {/* Increased space-x-2 to space-x-4 */}
+            <div className="relative w-24 h-8 flex items-center">
+              <Image 
+                src="/Filecoin.png"
+                alt="Filecoin Logo" 
+                width={32}
+                height={32}
+                className="object-contain mr-2"  // Added margin-right for spacing
+                priority
+              />
+              <span className="text-white mx-2">x</span> {/* Increased mx-1 to mx-2 */}
               <Image 
                 src="/fil B icon.png"
-                alt="Fil B Logo" 
+                alt="FIL-B Logo" 
                 width={32}
                 height={32}
                 className="object-contain"
@@ -438,11 +443,19 @@ export default function AppPage() {
         <div className="container mx-auto px-6">
           <div className="flex flex-wrap justify-between items-start">
             <div className="w-full md:w-1/3 mb-6 md:mb-0">
-              <Link href="/" className="flex items-center space-x-2 mb-2">
-                <div className="relative w-6 h-6">
+              <Link href="/" className="flex items-center space-x-4 mb-2"> {/* Increased space-x-2 to space-x-4 */}
+                <div className="relative w-24 h-8 flex items-center">
+                  <Image 
+                    src="/Filecoin.png"
+                    alt="Filecoin Logo" 
+                    width={24}
+                    height={24}
+                    className="object-contain mr-2"  // Added margin-right for spacing
+                  />
+                  <span className="text-white mx-2">x</span>
                   <Image 
                     src="/fil B icon.png"
-                    alt="Fil B Logo" 
+                    alt="FIL-B Logo" 
                     width={24}
                     height={24}
                     className="object-contain"
@@ -654,3 +667,4 @@ function smoothScroll(e: React.MouseEvent<HTMLAnchorElement>, targetId: string) 
     targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
+

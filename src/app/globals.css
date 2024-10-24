@@ -22,12 +22,12 @@
   --fil-secondary: #FA4747;
   --fil-yellow: #FFE05F;
   
-  /* Updated Background Colors - Even lighter gradient */
-  --background-start: #22232F;  /* Lightened from #1E1F2A */
-  --background-end: #16171F;    /* Lightened from #12131A */
+  /* Background Colors */
+  --background-start: #2A2B37;  
+  --background-end: #1B1C24;    
   
   /* Background Colors */
-  --card-bg: #1F2030;          /* Lightened from #1E2029 */
+  --card-bg: #1F2030;          
   --border-color: #2E3039;
   
   /* UI colors */
@@ -177,7 +177,7 @@
   }
 }
 
-/* Add styles for feature cards */
+/* Feature cards */
 .feature-card {
   @apply bg-[#1F2030] border border-[#2E3039] hover:border-[#0090FF] transition-all duration-300 transform hover:-translate-y-1;
   position: relative;
@@ -235,44 +235,44 @@ h1, h2 {
   font-family: 'Quicksand', system-ui, sans-serif;
   font-weight: bold;
   letter-spacing: 0;
-  font-size: 1.25rem; /* Increased from 1rem */
+  font-size: 1.25rem;
 }
 
 .subtitle {
   font-family: 'Quicksand', system-ui, sans-serif;
   font-weight: medium;
-  font-size: 1.125rem; /* Increased from 0.667em */
+  font-size: 1.125rem;
   letter-spacing: 0;
 }
 
 .paragraph {
   font-family: 'Quicksand', system-ui, sans-serif;
   font-weight: regular;
-  font-size: 1.125rem; /* Increased from 1rem */
+  font-size: 1.125rem;
   letter-spacing: 0;
-  line-height: 1.6; /* Added for better readability */
+  line-height: 1.6;
 }
 
-/* Update background gradient */
+/* Background gradient */
 body {
   background: linear-gradient(to bottom, var(--background-start), var(--background-end));
 }
 
-/* Make geometric shapes more visible against lighter background */
+
 .geometric-shape {
-  opacity: 0.25;  /* Increased from 0.2 for better visibility */
+  opacity: 0.25; 
 }
 
-/* Update card text sizes */
+/* Card text sizes */
 .feature-card h3 {
-  font-size: 1.375rem; /* Increased from 1.25rem */
+  font-size: 1.375rem;
 }
 
 .feature-card p {
-  font-size: 1.125rem; /* Increased from 1rem */
+  font-size: 1.125rem; 
 }
 
-/* Update integration card text */
+/* integration card */
 .integration-card h3 {
   font-size: 1.375rem;
 }
@@ -281,20 +281,20 @@ body {
   font-size: 1.125rem;
 }
 
-/* Update section descriptions */
+/* Section descriptions */
 .section-description {
   font-size: 1.25rem;
   line-height: 1.6;
 }
 
-/* Update header background */
+/* Header background */
 header {
-  @apply bg-[#1F2030]/95;  /* Lightened to match new theme */
+  @apply bg-[#1F2030]/95;  
 }
 
-/* Update any specific card styles */
+/* Card styles */
 .card, 
 .integration-card,
 [class*="bg-[#1E2029]"] {
-  background-color: #1F2030;  /* Update all card backgrounds */
+  background-color: #1F2030;  
 }
